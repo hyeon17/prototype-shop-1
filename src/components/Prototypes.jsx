@@ -2,12 +2,13 @@ import useActions from "../hooks/useActions";
 import usePrototypes from "../hooks/usePrototypes";
 
 export default function Prototypes() {
-  const prototypes = usePrototypes();
-  const { addToOrder } = useActions();
+  const prototypes = usePrototypes(); //usePrototypes.js에서 가져옴
+  const { addToOrder } = useActions(); //useActions.js에서 가져옴
   return (
     <main>
       <div className="prototypes">
         {prototypes.map((prototype) => {
+          //map이 요소를 하나씩 돌면서 꺼내옴
           const { id, thumbnail, title, price, desc, pieUrl } = prototype;
           const click = () => {
             addToOrder(id);

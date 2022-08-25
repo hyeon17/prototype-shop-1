@@ -9,14 +9,15 @@ export default function Orders() {
   const { remove, removeAll } = useActions();
 
   const totalPrice = useMemo(() => {
+    //결과값 useMemo에 저장됨 다시 재활용 가능
     return orders
       .map((order) => {
         const { id, quantity } = order;
         const prototype = prototypes.find((p) => p.id === id);
         return prototype.price * quantity;
       })
-      .reduce((l, r) => l + r, 0);
-  }, [orders, prototypes]);
+      .reduce((l, r) => l + r, 0); //reduce는 l과r의 합을 반환, 초기값 0
+  }, [orders, prototypes]); //의존성
 
   if (orders.length === 0) {
     return (
@@ -34,6 +35,7 @@ export default function Orders() {
       <div className="order">
         <div className="body">
           {orders.map((order) => {
+            //order를 map돌면서 하나씩 꺼내옴
             const { id } = order;
             const prototype = prototypes.find((p) => p.id === id);
             const click = () => {
@@ -46,6 +48,7 @@ export default function Orders() {
                 </div>
                 <div className="content">
                   <p className="title">
+                    {/* x는 문자열 */}
                     {prototype.title} x {order.quantity}
                   </p>
                 </div>

@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import AppStateContext from "../contexts/AppStateContext";
 
 const AppStateProvider = ({ children }) => {
+  //컴포넌트, props로 children이 들어옴
   const [prototypes] = useState([
     {
       id: "pp-01",
@@ -137,7 +138,7 @@ const AppStateProvider = ({ children }) => {
   ]);
   const [orders, setOrders] = useState([]);
 
-  // [{id, quantity: 1}]
+  // [{id, quantity: 1}] -> 한번 누르면 quantity가 1, 두번 누르면 2
   const addToOrder = useCallback((id) => {
     setOrders((orders) => {
       const finded = orders.find((order) => order.id === id);
@@ -149,7 +150,7 @@ const AppStateProvider = ({ children }) => {
           if (order.id === id) {
             return {
               id,
-              quantity: order.quantity + 1,
+              quantity: order.quantity + 1, //같은게 있으면 quantity하나 올려줌
             };
           } else {
             return order;
@@ -160,7 +161,7 @@ const AppStateProvider = ({ children }) => {
   }, []);
   const remove = useCallback((id) => {
     setOrders((orders) => {
-      return orders.filter((order) => order.id !== id);
+      return orders.filter((order) => order.id !== id); //filter: 주어진 함수의 테스트를 통과하는 모든 요소를 모아(true면 요소를 유지, false면 버림) 새로운 배열로 반환
     });
   }, []);
   const removeAll = useCallback(() => {
@@ -173,7 +174,7 @@ const AppStateProvider = ({ children }) => {
         prototypes,
         orders,
         addToOrder,
-        remove,
+        remove, //해당 oreder 삭제
         removeAll,
       }}
     >
